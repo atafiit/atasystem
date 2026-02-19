@@ -1,109 +1,71 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ATASYSTEM - Upgrade Your Reality</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8">
+  <title>ATASYSTEM</title>
   <style>
     body {
-      background: radial-gradient(circle at center, #0f172a, #020617);
-      overflow-x: hidden;
-    }
-
-    .glitch {
-      position: relative;
-      color: white;
-      font-weight: 800;
-      text-transform: uppercase;
-      animation: flicker 2s infinite alternate;
-    }
-
-    @keyframes flicker {
-      0% { opacity: 1; }
-      100% { opacity: 0.85; }
-    }
-
-    .glitch::before,
-    .glitch::after {
-      content: 'ATASYSTEM';
-      position: absolute;
-      left: 0;
-      width: 100%;
+      margin: 0;
       overflow: hidden;
-      clip: rect(0, 900px, 0, 0);
+      background: #050510;
     }
-
-    .glitch::before {
-      animation: glitchTop 2s infinite linear alternate-reverse;
-      color: #00f0ff;
-    }
-
-    .glitch::after {
-      animation: glitchBottom 1.5s infinite linear alternate-reverse;
-      color: #ff00c8;
-    }
-
-    @keyframes glitchTop {
-      0% { clip: rect(0, 900px, 0, 0); }
-      100% { clip: rect(0, 900px, 60px, 0); }
-    }
-
-    @keyframes glitchBottom {
-      0% { clip: rect(60px, 900px, 120px, 0); }
-      100% { clip: rect(30px, 900px, 90px, 0); }
+    h1 {
+      position: absolute;
+      top: 40%;
+      width: 100%;
+      text-align: center;
+      color: white;
+      font-size: 60px;
+      font-family: Arial, sans-serif;
+      letter-spacing: 5px;
     }
   </style>
 </head>
+<body>
 
-<body class="text-white">
+<h1>ATASYSTEM</h1>
 
-  <section class="h-screen flex flex-col justify-center items-center text-center relative">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
-    <div class="absolute inset-0 -z-10">
-      <!-- SPLINE EMBED BURAYA GELECEK -->
-    </div>
+<script>
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
 
-    <h1 class="text-6xl md:text-8xl glitch">ATASYSTEM</h1>
+const renderer = new THREE.WebGLRenderer({alpha:true});
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
 
-    <p class="mt-6 text-xl text-gray-300">
-      Upgrade Your Reality.
-    </p>
+const geometry = new THREE.IcosahedronGeometry(2,1);
+const material = new THREE.MeshStandardMaterial({
+  color: 0x4f00ff,
+  emissive: 0x2200ff,
+  metalness: 0.6,
+  roughness: 0.3
+});
 
-    <a href="#products" class="mt-10 px-8 py-4 bg-cyan-500 hover:bg-cyan-400 transition rounded-full font-bold">
-      Explore Collection
-    </a>
+const shape = new THREE.Mesh(geometry, material);
+scene.add(shape);
 
-  </section>
+const light = new THREE.PointLight(0xffffff, 2);
+light.position.set(5,5,5);
+scene.add(light);
 
-  <section id="products" class="py-20 px-6 bg-black">
-    <h2 class="text-4xl font-bold text-center mb-12">AI Selected Products</h2>
+camera.position.z = 6;
 
-    <div class="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+function animate() {
+  requestAnimationFrame(animate);
+  shape.rotation.x += 0.005;
+  shape.rotation.y += 0.007;
+  renderer.render(scene, camera);
+}
 
-      <div class="bg-gray-900 p-6 rounded-xl hover:scale-105 transition">
-        <img src="https://via.placeholder.com/300" class="rounded-lg mb-4">
-        <h3 class="text-xl font-semibold">Smart Urban Sneakers</h3>
-        <p class="text-gray-400 mt-2">Minimal design. Maximum impact.</p>
-        <p class="mt-4 text-cyan-400 font-bold text-lg">449 TL</p>
-      </div>
+animate();
 
-      <div class="bg-gray-900 p-6 rounded-xl hover:scale-105 transition">
-        <img src="https://via.placeholder.com/300" class="rounded-lg mb-4">
-        <h3 class="text-xl font-semibold">NextGen Tactical Watch</h3>
-        <p class="text-gray-400 mt-2">Engineered for performance.</p>
-        <p class="mt-4 text-cyan-400 font-bold text-lg">599 TL</p>
-      </div>
-
-      <div class="bg-gray-900 p-6 rounded-xl hover:scale-105 transition">
-        <img src="https://via.placeholder.com/300" class="rounded-lg mb-4">
-        <h3 class="text-xl font-semibold">AI Smart Backpack</h3>
-        <p class="text-gray-400 mt-2">Carry the future.</p>
-        <p class="mt-4 text-cyan-400 font-bold text-lg">799 TL</p>
-      </div>
-
-    </div>
-  </section>
+window.addEventListener('mousemove', (event) => {
+  shape.rotation.y = event.clientX * 0.0005;
+  shape.rotation.x = event.clientY * 0.0005;
+});
+</script>
 
 </body>
 </html>
