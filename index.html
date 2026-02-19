@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>ATASYSTEM</title>
 
-<!-- Modern cyber font -->
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
@@ -87,36 +86,52 @@ const renderer = new THREE.WebGLRenderer({ alpha: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
 
-const geometry = new THREE.IcosahedronGeometry(2, 1);
-const material = new THREE.MeshStandardMaterial({
-  color: 0x6a00ff,
-  emissive: 0x3300ff,
-  metalness: 0.6,
-  roughness: 0.3,
-  wireframe: false
+// Neon Torus
+const torusGeo = new THREE.TorusGeometry(2, 0.3, 16, 100);
+const torusMat = new THREE.MeshStandardMaterial({
+  color: 0xff00ff,
+  emissive: 0x5500ff,
+  metalness: 0.7,
+  roughness: 0.1
 });
+const torus = new THREE.Mesh(torusGeo, torusMat);
+scene.add(torus);
 
-const shape = new THREE.Mesh(geometry, material);
-scene.add(shape);
+// Neon Sphere inside
+const sphereGeo = new THREE.SphereGeometry(1, 32, 32);
+const sphereMat = new THREE.MeshStandardMaterial({
+  color: 0x00ffff,
+  emissive: 0x0033ff,
+  metalness: 0.7,
+  roughness: 0.1
+});
+const sphere = new THREE.Mesh(sphereGeo, sphereMat);
+scene.add(sphere);
 
-const light = new THREE.PointLight(0xffffff, 2);
-light.position.set(5,5,5);
-scene.add(light);
+const light1 = new THREE.PointLight(0xffffff, 2);
+light1.position.set(5,5,5);
+scene.add(light1);
 
-camera.position.z = 6;
+const light2 = new THREE.PointLight(0xff00ff, 1.5);
+light2.position.set(-5,-5,5);
+scene.add(light2);
+
+camera.position.z = 7;
 
 function animate() {
   requestAnimationFrame(animate);
-  shape.rotation.x += 0.003;
-  shape.rotation.y += 0.004;
+  torus.rotation.x += 0.002;
+  torus.rotation.y += 0.003;
+  sphere.rotation.y -= 0.004;
   renderer.render(scene, camera);
 }
 
 animate();
 
 window.addEventListener("mousemove", (event) => {
-  shape.rotation.y = event.clientX * 0.0003;
-  shape.rotation.x = event.clientY * 0.0003;
+  torus.rotation.y = event.clientX * 0.0003;
+  torus.rotation.x = event.clientY * 0.0003;
+  sphere.rotation.y = -event.clientX * 0.0002;
 });
 
 window.addEventListener("resize", function () {
