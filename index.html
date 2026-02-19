@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ATASYSTEM - Upgrade Your Reality</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: radial-gradient(circle at center, #0f172a, #020617);
+      overflow-x: hidden;
+    }
+
+    .glitch {
+      position: relative;
+      color: white;
+      font-weight: 800;
+      text-transform: uppercase;
+      animation: flicker 2s infinite alternate;
+    }
+
+    @keyframes flicker {
+      0% { opacity: 1; }
+      100% { opacity: 0.85; }
+    }
+
+    .glitch::before,
+    .glitch::after {
+      content: 'ATASYSTEM';
+      position: absolute;
+      left: 0;
+      width: 100%;
+      overflow: hidden;
+      clip: rect(0, 900px, 0, 0);
+    }
+
+    .glitch::before {
+      animation: glitchTop 2s infinite linear alternate-reverse;
+      color: #00f0ff;
+    }
+
+    .glitch::after {
+      animation: glitchBottom 1.5s infinite linear alternate-reverse;
+      color: #ff00c8;
+    }
+
+    @keyframes glitchTop {
+      0% { clip: rect(0, 900px, 0, 0); }
+      100% { clip: rect(0, 900px, 60px, 0); }
+    }
+
+    @keyframes glitchBottom {
+      0% { clip: rect(60px, 900px, 120px, 0); }
+      100% { clip: rect(30px, 900px, 90px, 0); }
+    }
+  </style>
+</head>
+
+<body class="text-white">
+
+  <section class="h-screen flex flex-col justify-center items-center text-center relative">
+
+    <div class="absolute inset-0 -z-10">
+      <!-- SPLINE EMBED BURAYA GELECEK -->
+    </div>
+
+    <h1 class="text-6xl md:text-8xl glitch">ATASYSTEM</h1>
+
+    <p class="mt-6 text-xl text-gray-300">
+      Upgrade Your Reality.
+    </p>
+
+    <a href="#products" class="mt-10 px-8 py-4 bg-cyan-500 hover:bg-cyan-400 transition rounded-full font-bold">
+      Explore Collection
+    </a>
+
+  </section>
+
+  <section id="products" class="py-20 px-6 bg-black">
+    <h2 class="text-4xl font-bold text-center mb-12">AI Selected Products</h2>
+
+    <div class="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+
+      <div class="bg-gray-900 p-6 rounded-xl hover:scale-105 transition">
+        <img src="https://via.placeholder.com/300" class="rounded-lg mb-4">
+        <h3 class="text-xl font-semibold">Smart Urban Sneakers</h3>
+        <p class="text-gray-400 mt-2">Minimal design. Maximum impact.</p>
+        <p class="mt-4 text-cyan-400 font-bold text-lg">449 TL</p>
+      </div>
+
+      <div class="bg-gray-900 p-6 rounded-xl hover:scale-105 transition">
+        <img src="https://via.placeholder.com/300" class="rounded-lg mb-4">
+        <h3 class="text-xl font-semibold">NextGen Tactical Watch</h3>
+        <p class="text-gray-400 mt-2">Engineered for performance.</p>
+        <p class="mt-4 text-cyan-400 font-bold text-lg">599 TL</p>
+      </div>
+
+      <div class="bg-gray-900 p-6 rounded-xl hover:scale-105 transition">
+        <img src="https://via.placeholder.com/300" class="rounded-lg mb-4">
+        <h3 class="text-xl font-semibold">AI Smart Backpack</h3>
+        <p class="text-gray-400 mt-2">Carry the future.</p>
+        <p class="mt-4 text-cyan-400 font-bold text-lg">799 TL</p>
+      </div>
+
+    </div>
+  </section>
+
+</body>
+</html>
